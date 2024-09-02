@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Tablas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+#tblContent {
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+#tblContent td,
+#tblContent th {
+  border: 1px solid black;
+}</style>
+</head>
+
+<body>
+
+<table>
+<caption title="pepe">Tabla 1</caption>
+  <tr>
+    <th >Fila /Columna </th>
+    <td >Columna 2</td>
+    <td >Columna 3</td>
+    <td >Columna 4</td>
+  </tr>
+  <tr>
+    <td>Fila 2</td>
+    <td>Celda 2-2</td>
+    <td>Celda 2-3</td>
+    <td>Celda 2-4</td>
+  </tr>
+  <tr>
+    <td>Fila 3</td>
+    <td>Celda 3-2</td>
+    <td>Celda 3-3</td>
+    <td>Celda 3-4</td>
+  </tr>
+  <tr>
+    <td>Fila 4</td>
+    <td>Celda 4-2</td>
+    <td>Celda 4-3</td>
+    <td>Celda 4-4</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<table id="tblContent">
+  <caption title="pepe">Tabla 2</caption>
+  <tr> 
+    <td colspan="2">Fila/Columna 1</td>
+    <td colspan="2">Fila/Columna 2</td>
+  </tr>
+  <tr> 
+    <td>Fila 2</td>
+    <td rowspan="2">Celda 2-2</td>
+    <td>Celda 2-3</td>
+    <td>Celda 2-4</td>
+  </tr>
+  <tr> 
+    <td>Fila 3</td>
+    <td>Celda 3-3</td>
+    <td>Celda 3-4</td>
+  </tr>
+  <tr> 
+    <td>Fila 4</td>
+    <td>Celda 4-2</td>
+    <td>Celda 4-3</td>
+    <td>Celda 4-4</td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+  web:
+    build:
+      context: .
+    volumes:
+      - ./www:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+
+  db:
+    image: postgres:13.8-bullseye
+    ports:
+     - 5433:5432
+    environment:
+      - POSTGRES_USER=usuario
+      - POSTGRES_PASSWORD=usuario
+      - POSTGRES_DB=usuariosdb
+    volumes: 
+      - ./data:/var/lib/postgresql/data
+      - ${PWD}/sql:/scripts
+
