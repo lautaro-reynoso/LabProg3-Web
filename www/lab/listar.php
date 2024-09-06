@@ -48,14 +48,29 @@ Released   : 20120902
 						<h3>Listar Usuarios</h3>
 						<br>
 
+						<table class="tabla_listar" style="text-align:center;width:100%;">
+						<thead>
+						<td>Nick</td>
+							<td>Nombre</td>
+							<td>Apellido</td>
+							<td class='mail' >Email</td>
+							<td>Direccion</td>
+							<td>Genero</td>
+							<td>Telefono</td>
+							</thead>
 						<?php
 						// Se establece la conexión a la base de datos
-						$dbconn = pg_connect("host=db dbname=usuariosdb user=usuarioadm password=usuarioadm")
+						$dbconn = pg_connect("host=db dbname=usuariosdb user=usuario password=usuario")
 							or die('No se ha podido conectar: ' . pg_last_error());
 						// Se recuperan los usuarios
+
+
+
+
 						// Si devuelve falso es por que fallo la consulta
 						$result = pg_query($dbconn, 'SELECT nick, nombre, apellido, email, direccion, genero, telefono FROM usuario ORDER BY apellido');
 						?>
+					
 						<?php
 						// recupera cada usuario como un arreglo asociativo con los nombres de las columnas como indices
 						while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -95,6 +110,7 @@ Released   : 20120902
 		<p>Copyright (c) 2012 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>.</p>
 	</div>
 	<!-- end #footer -->
+	
 </body>
 
 </html>

@@ -244,7 +244,7 @@ td {
 
 #content {
   float: left;
-  width: 590px;
+ 
   padding: 50px 0px 0px 0px;
 }
 
@@ -511,4 +511,54 @@ td {
   text-transform: lowercase;
   font-size: 30px;
   color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+
+table {
+    color: #ffffff;
+    font-size: 14px;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+   
+}
+
+thead {
+   background: url(images/img02.jpg) repeat;
+ 
+}
+
+th {
+    padding: 20px 15px ;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+td {
+    padding: 15px;
+    border-bottom: solid 1px rgb(0, 0, 0);
+}
+
+
+tbody tr {
+  color: rgb(100, 100, 100);
+    cursor: pointer;
+}
+
+tbody tr:hover {
+  color: rgb(0, 0, 0);
+    background: #c5da99 url(images/img01.jpg) repeat;
+}
+
+.mail{
+  width:  200px;
 }

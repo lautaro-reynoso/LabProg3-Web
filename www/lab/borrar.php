@@ -48,6 +48,8 @@ Released   : 20120902
 					<h3>Borrar Usuario</h3>
 						<br>
 
+					
+
 						<?php
 						// Se establece la conexión a la base de datos
 						$dbconn = pg_connect("host=db dbname=usuariosdb user=usuario password=usuario")

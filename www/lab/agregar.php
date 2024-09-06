@@ -48,7 +48,73 @@ Released   : 20120902
 					<div class="entry">
 						<h3>Nuevo Usuario</h3>
 						<br>
+
+						<form action="" method="post">
+						<div class="formulario"  >
+						<label>Nombre</label>
+						<input type="text" name="nombre" required>
+						</div>
+
+						<div  class="formulario"   >
+						<label>Apellido</label>
+						<input type="text" name="apellido" required>
+						</div>
+
+						<div  class="formulario"   >
+						<label>Nick</label>
+						<input type="text" name="nick" required>
+						</div>
+
+						<div  class="formulario"   >
+						<label>Email</label>
+						<input type="email" name="email" required>
+						</div>
+
+						<div  class="formulario"    >
+						<label>Direcci&oacute;n</label>
+						<input type="text" name="direccion" required>
+						</div>
+
+
+						<div  class="formulario"   >
+						<label>Teléfono</label>
+						<input type="text" name="telefono" required>
+						</div>
+
+
+						<div  class="formulario"   >
+						
+						<label for="genero">Seleccione género</label>
+  				<select name="genero">
+    <option value="Hombre">Hombre</option>
+    <option value="Mujer">Mujer</option>
+    <option value="Otro">Otro</option>
+  </select>
+
+						
+						</div>
+
+
+						<input type="submit" value="Submit">
+						</form>
+
+
 						<?php
+
+						
+
+						if($_SERVER['REQUEST_METHOD'] === "POST"){
+							
+							
+							$nombre = $_POST['nombre'];
+							$apellido = $_POST['apellido'];
+							$nick = $_POST['nick'];
+							$email = $_POST['email'];
+							$direccion = $_POST['direccion'];
+							$telefono = $_POST['telefono'];
+							$gender = $_POST['genero'];
+					
+
 						// Se conecta a la base de datos
 						$dbconn = pg_connect("host=db dbname=usuariosdb user=usuario password=usuario")
 							or die('No se ha podido conectar: ' . pg_last_error());
@@ -74,6 +140,8 @@ Released   : 20120902
 						if ($dbconn) {
 							pg_close($dbconn);
 						}
+
+					}
 						?>
 
 					</div>
@@ -88,6 +156,16 @@ Released   : 20120902
 	<div id="footer">
 		<p>Copyright (c) 2012 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>.</p>
 	</div>
+	<style>
+
+		.formulario{
+			justify-content:space-between;
+			display:flex;
+			width: 400px;
+			gap:5px;
+			padding:5px;
+		}
+	</style>
 </body>
 
 </html>
