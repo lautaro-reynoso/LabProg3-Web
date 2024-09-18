@@ -52,33 +52,33 @@ Released   : 20120902
 						<form action="" method="post">
 						<div class="formulario"  >
 						<label>Nombre</label>
-						<input type="text" name="nombre" required>
+						<input type="text" name="nombre"  >
 						</div>
 
 						<div  class="formulario"   >
 						<label>Apellido</label>
-						<input type="text" name="apellido" required>
+						<input type="text" name="apellido"  >
 						</div>
 
 						<div  class="formulario"   >
 						<label>Nick</label>
-						<input type="text" name="nick" required>
+						<input type="text" name="nick"  >
 						</div>
 
 						<div  class="formulario"   >
 						<label>Email</label>
-						<input type="email" name="email" required>
+						<input type="text" name="email"  >
 						</div>
 
 						<div  class="formulario"    >
 						<label>Direcci&oacute;n</label>
-						<input type="text" name="direccion" required>
+						<input type="text" name="direccion"  >
 						</div>
 
 
 						<div  class="formulario"   >
 						<label>Teléfono</label>
-						<input type="text" name="telefono" required>
+						<input type="text" name="telefono"  >
 						</div>
 
 
@@ -95,7 +95,7 @@ Released   : 20120902
 						</div>
 
 
-						<input type="submit" value="Submit">
+						<input type="submit" value="Enviar" class="enviar-btn">
 						</form>
 
 
@@ -122,18 +122,57 @@ Released   : 20120902
 						$result = pg_query_params($dbconn, 'SELECT * FROM usuario WHERE nick = $1', array($nick));
 						if ($line = pg_fetch_assoc($result)) {
 							if (count($line) > 0) {
+
 								$nickError = "El nick ya existe";
 								$error = true;
+							
+								echo $nickError;
 							}
 						}
 						?>
 
 
 						<?php
+
+						
+
 						$array = array($nombre, $apellido, $nick, $email, $direccion, $telefono, $gender);
+						
+
+						$campovacio = false;
+						$flag = false;
+						foreach($array as $campo){
+							if(empty(trim($campo))){
+							$campovacio= true;
+							}
+							
+						}
+						if($campovacio== false){
+							if(!preg_match("/^[a-zA-Z ]*$/",$nombre)  || !preg_match("/^[a-zA-Z ]*$/",$apellido) ){
+								echo ("Solo se permiten letras y espacios.");	
+								$flag = true;
+							}
+							if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+								echo ("Ingrese un correo válido.");
+								$flag = true;
+							}
+							if(!preg_match('/^[0-9]{10}$/', $telefono)){
+								echo ("Ingrese un teléfono válido.");
+								$flag = true;
+							}
+						if($flag == false){
+						ini_set('display_errors', 0); 
+						error_reporting(E_ALL); 
 						$sql = 'INSERT INTO usuario(nombre, apellido, nick, email, direccion, telefono, genero) values ($1, $2, $3, $4, $5, $6, $7);';
-						// Se inserta en la base de datos el nuevo usuario
-						$result = pg_query_params($dbconn, $sql, $array);
+
+					}else{
+						echo "\nPor favor modifique los campos.";
+					}
+					
+
+					}else{
+						echo "Complete todos los campos";
+					}
 						?>
 						<?php
 						// se cierra la conexión a la base de datos
@@ -156,16 +195,7 @@ Released   : 20120902
 	<div id="footer">
 		<p>Copyright (c) 2012 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>.</p>
 	</div>
-	<style>
 
-		.formulario{
-			justify-content:space-between;
-			display:flex;
-			width: 400px;
-			gap:5px;
-			padding:5px;
-		}
-	</style>
 </body>
 
 </html>

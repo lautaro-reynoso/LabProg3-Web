@@ -56,46 +56,64 @@ Released   : 20120902
 							or die('No se ha podido conectar: ' . pg_last_error());
 						?>
 						<?php
-						// Se busca un usuario con el nick ingresado en el formulario
+						$result = pg_query($dbconn, 'SELECT nick, nombre, apellido, email, direccion, genero, telefono FROM usuario ORDER BY apellido');
+						
+
+						?>
+						<table class="tabla_listar" style="text-align:center;width:100%;">
+						<thead>
+						<td>Nick</td>
+							<td>Nombre</td>
+							<td>Apellido</td>
+							<td class='mail' >Email</td>
+							<td>Direccion</td>
+							<td>Genero</td>
+							<td>Telefono</td>
+							<td>Borrar</td>
+						</thead>
+						<?php
+						while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+							echo "\t<tr>\n";
+							echo "\t\t<td>" . $line["nick"] . "</td>\n";
+							echo "\t\t<td>" . $line["nombre"] . "</td>\n";
+							echo "\t\t<td>" . $line["apellido"] . "</td>\n";
+							echo "\t\t<td>" . $line["email"] . "</td>\n";
+							echo "\t\t<td>" . $line["direccion"] . "</td>\n";
+							echo "\t\t<td>" . $line["genero"] . "</td>\n";
+							echo "\t\t<td>" . $line["telefono"] . "</td>\n";
+							
+							?>
+							<td>
+									<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+										<input type="hidden" name="nick" value="<?php echo $line["nick"] ?>">
+										<input type="submit" name="borrar" value="Borrar">
+									</form>
+								</td>
+							<?php
+							echo "\t</tr>\n";
+						}
+						?>
+						</table>
+						<?php
+						if($_SERVER['REQUEST_METHOD'] === "POST"){
+							$nick = $_POST['nick'];
+							// Se busca un usuario con el nick ingresado en el formulario
 						$result = pg_query_params($dbconn, 'DELETE FROM usuario WHERE nick = $1', array($nick));
 						if (pg_affected_rows($result)) {
 							$message = "Usuario " . $nick . " eliminado";
 						} else {
 							$message = "No se pudo eliminar el usuario";
 						}
-						?>
-
-						<?php
-						// Se recuperan los usuarios
-						// Si devuelve falso es por que fallo la consulta
-						$result = pg_query($dbconn, 'SELECT nick, nombre, apellido, email, direccion, genero, telefono FROM usuario ORDER BY apellido');
-						// recupera cada usuario como un arreglo asociativo con los nombres de las columnas como indices
-						while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) { ?>
-							<tr>
-								<td><?php echo $line["nick"] ?></td>
-								<td><?php echo $line["nombre"] ?></td>
-								<td><?php echo $line["apellido"] ?></td>
-								<td><?php echo $line["email"] ?></td>
-								<td><?php echo $line["direccion"] ?></td>
-								<td><?php echo $line["genero"] ?></td>
-								<td><?php echo $line["telefono"] ?></td>
-								<td>
-									<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-										<input type="hidden" name="nick" value="<?php echo $line["nick"] ?>">
-										<input type="submit" name="borrar" value="Borrar">
-									</form>
-								</td>
-							</tr>
-						<?php
-						}
-						?>
-
-						<?php
+						
 						// se cierra la conexión a la base de datos
 						if ($dbconn) {
 							pg_close($dbconn);
 						}
+						
+						}
 						?>
+
+						
 
 
 					</div>
